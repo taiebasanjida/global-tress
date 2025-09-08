@@ -68,55 +68,54 @@
             <img src="./assets/hero-leaf2.png" alt="Right Image" class="max-h-[80%] w-auto object-contain">
         </div>
     </section>
+    
+<!-- api cart section -->
+       <main class="grid grid-cols-12 gap-6 p-6">
 
-    <main class="grid grid-cols-12 gap-6 p-6">
-
-  <!-- Categories (Left) -->
-  <aside class="col-span-12 md:col-span-2 bg-white p-4 rounded-lg shadow-lg">
-    <h3 class="text-lg font-bold mb-4">Categories</h3>
-    <div id="category-list" class="space-y-2">
-      <!-- Category buttons dynamically added here -->
-    </div>
-  </aside>
-
-
-  <!-- Spinner -->
-   <div id="spinner" class="hidden text-center col-span-12 py-4 text-green-600 font-semibold">
+    <!-- Categories (Left) -->
+    <aside class="col-span-12 md:col-span-2 bg-white p-4 rounded-lg shadow-lg">
+      <h3 class="text-lg font-bold mb-4">Categories</h3>
+      <div id="category-list" class="space-y-2">
+        <!-- Category buttons dynamically added here -->
+      </div>
+    </aside>
+     <!-- Spinner (simple) -->
+  <div id="spinner" class="hidden text-center col-span-12 py-4 text-green-600 font-semibold">
     Loading...
-  </div> 
-
-  <!-- Tree Cards (Middle) -->
-  <section id="tree-cards" class="col-span-12 md:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-4">
-    <div class="col-span-3 text-center">Loading trees...</div>
-  </section>
-
-  <!-- Cart (Right) -->
-  <aside class="col-span-12 md:col-span-3 bg-white p-4 rounded-lg shadow-lg sticky top-4">
-    <h3 class="text-xl font-bold mb-4">Your Cart</h3>
-    <div id="cart-items" class="space-y-2">
-      <!-- Cart items dynamically added here -->
-    </div>
-    <p class="mt-4 font-bold">Total: $<span id="cart-total">0</span></p>
-  </aside>
-
-</main>
-
-<!-- Tree Modal -->
-<dialog id="tree-modal" class="modal">
-  <div class="modal-box max-w-xl">
-    <h3 id="modal-title" class="font-bold text-2xl mb-4"></h3>
-    <img id="modal-image" class="w-full h-60 object-cover rounded-lg mb-4" alt="">
-    <p id="modal-description" class="text-gray-600 mb-2"></p>
-    <p id="modal-category" class="font-semibold"></p>
-    <p id="modal-price" class="font-bold text-green-700"></p>
-    <div class="modal-action">
-      <form method="dialog">
-        <button class="btn btn-sm">Close</button>
-      </form>
-    </div>
   </div>
-</dialog>
 
+
+    <!-- Tree Cards (Middle) -->
+    <section id="tree-cards" class="col-span-12 md:col-span-7 grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="col-span-3 text-center">Loading trees...</div>
+    </section>
+
+    <!-- Cart (Right) -->
+    <aside class="col-span-12 md:col-span-3 bg-white p-4 rounded-lg shadow-lg sticky top-4">
+      <h3 class="text-xl font-bold mb-4">Your Cart</h3>
+      <div id="cart-items" class="space-y-2">
+        <!-- Cart items dynamically added here -->
+      </div>
+      <p class="mt-4 font-bold">Total: $<span id="cart-total">0</span></p>
+    </aside>
+
+  </main>
+
+  <!-- Tree Modal -->
+  <dialog id="tree-modal" class="modal">
+    <div class="modal-box max-w-xl">
+      <h3 id="modal-title" class="font-bold text-2xl mb-4"></h3>
+      <img id="modal-image" class="w-full h-60 object-cover rounded-lg mb-4" alt="">
+      <p id="modal-description" class="text-gray-600 mb-2"></p>
+      <p id="modal-category" class="font-semibold"></p>
+      <p id="modal-price" class="font-bold text-green-700"></p>
+      <div class="modal-action">
+        <form method="dialog">
+          <button class="btn btn-sm">Close</button>
+        </form>
+      </div>
+    </div>
+  </dialog>
 
         <!-- about the campaign -->
     <section class="w-full max-w-[1920px] mx-auto py-12 px-4 md:px-10 bg-white">
