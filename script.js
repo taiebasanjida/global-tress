@@ -54,6 +54,7 @@ async function fetchTreesByCategory(id) {
     const data = await res.json();
     trees = data.plants;
     renderTrees();
+    renderCart();
     toggleSpinner(false);
   } catch (e) {
     console.error(e);
@@ -64,7 +65,6 @@ async function fetchTreesByCategory(id) {
 // Render categories
 function renderCategories() {
   categoryList.innerHTML = '';
-  // Add "All Trees" button
   const allBtn = document.createElement('button');
   allBtn.textContent = 'All Trees';
   allBtn.className = activeCategory === null ? 'btn btn-block bg-green-600 text-white' : 'btn btn-block';
@@ -95,21 +95,28 @@ function renderTrees() {
     treeCards.innerHTML = '<div class="col-span-3 text-center">No trees found.</div>';
     return;
   }
+
   trees.forEach(tree => {
     const card = document.createElement('div');
     card.className = 'card bg-white shadow-lg p-4';
+
     card.innerHTML = `
-      <img src="${tree.image}" alt="${tree.name}" class="w-full h-48 object-cover mb-4">
-      <h3 class="font-bold text-lg">${tree.name}</h3>
+      <img src="${tree.image}" alt="${tree.name}" class="w-full h-48 object-cover mb-2">
+      <h3 class="font-bold text-lg cursor-pointer text-blue-600 hover:underline">${tree.name}</h3>
       <p class="text-sm">${tree.description.substring(0, 100)}...</p>
       <p class="text-sm">Category: ${tree.category}</p>
       <div class="flex justify-between mt-4 mb-4">
-        <!-- এখানে Details এর জায়গায় নাম আসছে -->
-        <button class="btn btn-sm btn-info bg-[#DCFCE7] rounded-3xl" onclick="openTreeModal(${tree.id})">${tree.name}</button>
+        <!-- Details button stays but does not open modal -->
+        <button class="btn btn-sm btn-info bg-[#DCFCE7] rounded-3xl">Details</button>
         <p class="text-sm font-bold">$${tree.price}</p>
       </div>
       <button class="btn btn-sm bg-[#15803D] rounded-2xl text-white w-full" onclick="addToCart(${tree.id})">Add to Cart</button>
     `;
+
+    // Name click event opens modal
+    const nameElement = card.querySelector('h3');
+    nameElement.onclick = () => openTreeModal(tree.id);
+
     treeCards.appendChild(card);
   });
 }
@@ -127,23 +134,40 @@ function removeFromCart(index) {
   renderCart();
 }
 
+// Render Cart with clickable names
 function renderCart() {
   cartItems.innerHTML = '';
   let total = 0;
+
   cart.forEach((item, i) => {
     const div = document.createElement('div');
     div.className = 'flex justify-between items-center p-2 border-b';
-    div.innerHTML = `<span>${item.name} - $${item.price}</span>
-      <button class="btn btn-sm btn-error" onclick="removeFromCart(${i})"><i class="fa-solid fa-xmark"></i></button>`;
+
+    // Cart name clickable for modal
+    const nameSpan = document.createElement('span');
+    nameSpan.textContent = `${item.name} - $${item.price}`;
+    nameSpan.className = 'cursor-pointer text-blue-600 hover:underline';
+    nameSpan.onclick = () => openTreeModal(item.id);
+
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'btn btn-sm btn-error';
+    removeBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    removeBtn.onclick = () => removeFromCart(i);
+
+    div.appendChild(nameSpan);
+    div.appendChild(removeBtn);
     cartItems.appendChild(div);
+
     total += item.price;
   });
+
   cartTotal.textContent = total;
 }
 
 // Modal
 function openTreeModal(id) {
-  const tree = trees.find(t => t.id === id);
+  const tree = trees.find(t => t.id === id) || cart.find(t => t.id === id);
+  if (!tree) return;
   modalTitle.textContent = tree.name;
   modalImage.src = tree.image;
   modalDescription.textContent = tree.description;
