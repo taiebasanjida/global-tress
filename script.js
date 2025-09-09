@@ -18,15 +18,17 @@
   const spinner = document.getElementById('spinner');
 
   // Spinner toggle
-  function toggleSpinner(show) {
-    if (show) {
-      spinner.classList.remove('hidden');
-      treeCards.classList.add('hidden');
-    } else {
+   function toggleSpinner(show) {
+     if (show) {
+       spinner.classList.remove('hidden');
+       treeCards.classList.add('hidden');
+     } else {
       spinner.classList.add('hidden');
-      treeCards.classList.remove('hidden');
+       treeCards.classList.remove('hidden');
     }
-  }
+   }
+
+
 
   // Fetch categories
   async function fetchCategories() {
